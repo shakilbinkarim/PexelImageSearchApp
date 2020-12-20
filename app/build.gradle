@@ -43,6 +43,7 @@ android {
     }
 }
 
+def materialVersion = '1.2.1'
 def appCompatVersion = '1.2.0'
 def constraintLayoutVersion = '1.1.3'
 def espressoVersion = '3.2.0'
@@ -65,6 +66,8 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$testExtJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+    implementation "com.google.android.material:material:$materialVersion"
 
     // Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
