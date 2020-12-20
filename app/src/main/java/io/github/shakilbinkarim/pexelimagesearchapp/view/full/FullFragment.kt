@@ -55,7 +55,7 @@ class FullFragment : Fragment(R.layout.fragment_full) {
             val uri = Uri.parse(photo.photographer_url)
             val intent = Intent(Intent.ACTION_VIEW, uri)
             tvPhotographer.apply {
-                text = "Photo captured by ${photo.photographer} on Unspash"
+                text = "Photo captured by ${photo.photographer}"
                 setOnClickListener {context.startActivity(intent)}
                 paint.isUnderlineText = true
             }
