@@ -26,7 +26,7 @@ class FullFragment : Fragment(R.layout.fragment_full) {
         binding.apply {
             val photo = args.pexelData
             Glide.with(this@FullFragment)
-                .load(photo.src.small)
+                .load(photo.src.original)
                 .error(R.drawable.ic_error)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(

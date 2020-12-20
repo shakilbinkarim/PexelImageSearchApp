@@ -17,7 +17,6 @@
                 android:id="@+id/iv_full_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/pexel_photo"
                 tools:layout_height="300dp"

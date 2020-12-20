@@ -64,7 +64,7 @@ class PhotoAdapter(private val listener: OnItemClickListener) :
         fun bind(photo: PexelPhoto) {
             binding.apply {
                 Glide.with(itemView)
-                    .load(photo.src.original)
+                    .load(photo.src.medium)
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
