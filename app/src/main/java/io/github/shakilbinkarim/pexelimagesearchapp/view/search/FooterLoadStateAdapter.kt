@@ -31,9 +31,7 @@ class FooterLoadStateAdapter(private val retry: () -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.btnPexelFooterRetry.setOnClickListener {
-                retry.invoke()
-            }
+            binding.btnPexelFooterRetry.setOnClickListener { retry.invoke() }
         }
 
         fun bind(loadState: LoadState) {

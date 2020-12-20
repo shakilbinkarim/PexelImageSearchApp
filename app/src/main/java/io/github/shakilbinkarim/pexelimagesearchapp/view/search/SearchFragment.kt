@@ -35,10 +35,12 @@ class SearchFragment: Fragment(R.layout.fragment_search),
             )
             btnRetry.setOnClickListener { adapter.retry() }
         }
-        viewModel.photos.observe(viewLifecycleOwner) {
-            adapter.submitData(viewLifecycleOwner.lifecycle, it)
-        }
+        dealWithObservables(adapter)
+        setupLoadStateListenerForAdapter(adapter)
+        setHasOptionsMenu(true)
+    }
 
+    private fun setupLoadStateListenerForAdapter(adapter: PhotoAdapter) {
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 pbGallery.isVisible = loadState.source.refresh is LoadState.Loading
@@ -56,8 +58,12 @@ class SearchFragment: Fragment(R.layout.fragment_search),
                 }
             }
         }
+    }
 
-        setHasOptionsMenu(true)
+    private fun dealWithObservables(adapter: PhotoAdapter) {
+        viewModel.photos.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
     }
 
     override fun onDestroyView() {
