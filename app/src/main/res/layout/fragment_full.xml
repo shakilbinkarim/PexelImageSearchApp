@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_full_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/pexel_photo"
+                tools:layout_height="300dp"
+                tools:scaleType="centerCrop"
+                tools:src="@mipmap/ic_launcher_round" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignBottom="@+id/iv_full_image"
+                android:background="@drawable/gradient" />
+
+            <TextView
+                android:id="@+id/tv_photographer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/iv_full_image"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:visibility="gone"
+                tools:text="Photo by ......."
+                tools:visibility="visible" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/pb_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+</FrameLayout>
