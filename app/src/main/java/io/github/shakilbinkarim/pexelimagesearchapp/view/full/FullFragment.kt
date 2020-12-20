@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import io.github.shakilbinkarim.pexelimagesearchapp.R
 import io.github.shakilbinkarim.pexelimagesearchapp.databinding.FragmentFullBinding
+import io.github.shakilbinkarim.pexelimagesearchapp.model.PexelPhoto
 
 class FullFragment : Fragment(R.layout.fragment_full) {
 
@@ -25,40 +26,48 @@ class FullFragment : Fragment(R.layout.fragment_full) {
         val binding = FragmentFullBinding.bind(view)
         binding.apply {
             val photo = args.pexelData
-            Glide.with(this@FullFragment)
-                .load(photo.src.original)
-                .error(R.drawable.ic_error)
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        pbFull.isVisible = false
-                        return false
-                    }
-
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        pbFull.isVisible = false
-                        tvPhotographer.isVisible = true
-                        return false
-                    }
-                })
-                .into(ivFullImage)
-            val uri = Uri.parse(photo.photographer_url)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            tvPhotographer.apply {
-                text = "Photo captured by ${photo.photographer}"
-                setOnClickListener {context.startActivity(intent)}
-                paint.isUnderlineText = true
-            }
+            loadFullSizedImage(photo)
+            dealWithPhotographerNameTextView(photo)
         }
+    }
+
+    private fun FragmentFullBinding.dealWithPhotographerNameTextView(photo: PexelPhoto) {
+        val uri = Uri.parse(photo.photographer_url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        tvPhotographer.apply {
+            "Photo captured by ${photo.photographer}".also { text = it }
+            setOnClickListener { context.startActivity(intent) }
+            paint.isUnderlineText = true
+        }
+    }
+
+    private fun FragmentFullBinding.loadFullSizedImage(photo: PexelPhoto) {
+        Glide.with(this@FullFragment)
+            .load(photo.src.original)
+            .error(R.drawable.ic_error)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    pbFull.isVisible = false
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    pbFull.isVisible = false
+                    tvPhotographer.isVisible = true
+                    return false
+                }
+            })
+            .into(ivFullImage)
     }
 }
