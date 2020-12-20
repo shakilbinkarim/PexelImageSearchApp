@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PexelImageSearchApp</string>
+    <string name="app_name">Pexel Image Search App</string>
     <string name="photographer_name">Photographer</string>
     <string name="retry">Retry</string>
     <string name="failure_msg_result_load">Failed to load results. :(</string>

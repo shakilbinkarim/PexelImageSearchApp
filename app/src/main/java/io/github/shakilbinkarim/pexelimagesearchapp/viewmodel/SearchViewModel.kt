@@ -2,10 +2,7 @@ package io.github.shakilbinkarim.pexelimagesearchapp.viewmodel
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.cachedIn
 import io.github.shakilbinkarim.pexelimagesearchapp.repository.PexelRepository
 
