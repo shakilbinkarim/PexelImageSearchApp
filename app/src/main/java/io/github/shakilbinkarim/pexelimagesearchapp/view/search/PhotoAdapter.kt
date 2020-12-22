@@ -41,9 +41,7 @@ class PhotoAdapter(private val listener: OnItemClickListener) :
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val currentItem = getItem(position)
-        currentItem?.let {
-            holder.bind(it)
-        }
+        currentItem?.let(holder::bind)
     }
 
     inner class PhotoViewHolder(private val binding: ItemPexelPhotoBinding) :
@@ -54,9 +52,7 @@ class PhotoAdapter(private val listener: OnItemClickListener) :
                 val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
-                    item?.let {
-                        listener.onItemClick(it)
-                    }
+                    item?.let(listener::onItemClick)
                 }
             }
         }
