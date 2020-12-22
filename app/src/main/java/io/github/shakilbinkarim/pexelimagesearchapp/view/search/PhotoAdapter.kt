@@ -29,15 +29,14 @@ class PhotoAdapter(private val listener: OnItemClickListener) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
-        val binding =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder =
+        PhotoViewHolder(
             ItemPexelPhotoBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-        return PhotoViewHolder(binding)
-    }
+        )
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val currentItem = getItem(position)

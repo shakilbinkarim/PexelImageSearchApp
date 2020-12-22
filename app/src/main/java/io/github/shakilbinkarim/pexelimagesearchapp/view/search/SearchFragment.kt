@@ -27,9 +27,9 @@ class SearchFragment: Fragment(R.layout.fragment_search),
         _binding = FragmentSearchBinding.bind(view)
         val adapter = PhotoAdapter(this)
         binding.apply {
-            rvGallery.setHasFixedSize(true)
-            rvGallery.itemAnimator = null
-            rvGallery.adapter = adapter.withLoadStateHeaderAndFooter(
+            rvSearch.setHasFixedSize(true)
+            rvSearch.itemAnimator = null
+            rvSearch.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = FooterLoadStateAdapter { adapter.retry() },
                 footer = FooterLoadStateAdapter { adapter.retry() },
             )
@@ -44,14 +44,14 @@ class SearchFragment: Fragment(R.layout.fragment_search),
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 pbGallery.isVisible = loadState.source.refresh is LoadState.Loading
-                rvGallery.isVisible = loadState.source.refresh is LoadState.NotLoading
+                rvSearch.isVisible = loadState.source.refresh is LoadState.NotLoading
                 btnRetry.isVisible = loadState.source.refresh is LoadState.Error
                 tvError.isVisible = loadState.source.refresh is LoadState.Error
                 val noResult = loadState.source.refresh is LoadState.NotLoading &&
                         loadState.append.endOfPaginationReached &&
                         adapter.itemCount < 1
                 if (noResult) {
-                    rvGallery.isVisible = false
+                    rvSearch.isVisible = false
                     tvNoResult.isVisible = true
                 } else {
                     tvNoResult.isVisible = false
@@ -60,11 +60,10 @@ class SearchFragment: Fragment(R.layout.fragment_search),
         }
     }
 
-    private fun dealWithObservables(adapter: PhotoAdapter) {
+    private fun dealWithObservables(adapter: PhotoAdapter) =
         viewModel.photos.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -79,7 +78,7 @@ class SearchFragment: Fragment(R.layout.fragment_search),
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    binding.rvGallery.scrollToPosition(0)
+                    binding.rvSearch.scrollToPosition(0)
                     viewModel.searchPhotos(query)
                     searchView.clearFocus()
                 }

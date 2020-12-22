@@ -15,15 +15,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit =
+    fun providePexelApiApi(): PexelApi =
         Retrofit.Builder()
             .baseUrl(PexelApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
-    @Provides
-    @Singleton
-    fun providePexelApiApi(retrofit: Retrofit) : PexelApi =
-        retrofit.create(PexelApi::class.java)
+            .create(PexelApi::class.java)
 
 }
