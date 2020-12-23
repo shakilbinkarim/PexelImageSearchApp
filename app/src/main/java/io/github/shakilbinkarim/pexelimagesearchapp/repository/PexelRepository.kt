@@ -14,7 +14,7 @@ class PexelRepository @Inject constructor (private val pexelApi: PexelApi) {
             config = PagingConfig(
                 pageSize = 10,
                 maxSize = 50,
-                enablePlaceholders = false
+                enablePlaceholders = true
             ),
             pagingSourceFactory = {
                 PexelPagingSource(pexelApi, query)

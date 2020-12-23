@@ -15,7 +15,7 @@ class PexelPagingSource (
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PexelPhoto> {
         val position = params.key ?: PEXEL_STARTING_PAGE_INDEX
         return try{
-            val response = pexelApi.searchPhotos(query, position, params.loadSize)
+            val response = pexelApi.searchPhotos(query = query, perPage = params.loadSize, page=position)
             val photos = response.results
             LoadResult.Page(
                 data = photos,
